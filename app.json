@@ -1,0 +1,43 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/main/login",
+        "pages/homeIndex/index",
+        "pages/homePersonal/index",
+        "pages/homeCusManage/index",
+        "pages/homeCusAdd/index",
+        "pages/homeEquipmentAdd/index",
+        "pages/homeEquipmentManage/index",
+        "pages/homeLookDetails/index",
+        "pages/homePersonalInfo/index",
+        "pages/homeEquipmentStatus/index",
+        "pages/homeEquipmentStatusList/index"
+        
+        
+        
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black"
+    },
+    "sitemapLocation": "sitemap.json",
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/homeIndex/index",
+                "iconPath": "/image/icon/icon_2023_01_06_01_default.png",
+                "selectedIconPath": "/image/icon/icon_2023_01_06_01.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/homePersonal/index",
+                "iconPath": "/image/icon/icon_2023_01_06_02_default.png",
+                "selectedIconPath": "/image/icon/icon_2023_01_06_02.png",
+                "text": "我的"
+            }
+        ],
+        "selectedColor": "#409DFF"
+    }
+}

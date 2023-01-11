@@ -1,0 +1,101 @@
+<view class="page">
+  <view style="position:relative;">
+    <image src="/image/icon/icon_2023_01_06_16.png" style="height:{{isIphoneX?(170+StatusBar):170}}px;width:100%;"/>
+    <view class="mine_view1" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+      <view class="mine_title" style="height:{{CustomBar}}px;position: absolute;display: flex;align-items: center;justify-content: center;">个人中心</view>
+    </view>
+  </view>
+
+  <view class="mine_new_view">
+
+  
+    <view class="mine_center" bind:tap="catchHandler" data-pathstring="/pages/homePersonalInfo/index" data-title="个人信息">
+        <view class="hp_1_item">
+			<view class="hp_1_item_l">
+				<view class="hp_1_item_l_1">
+					<image class='hp_1_item_l_h' src='/image/icon/icon_2023_01_06_09.png' />
+				</view>
+				<view class="hp_1_item_l_2">
+					<view class="hp_1_item_l_2_title">{{real_name}}</view>
+					<view class="hp_1_item_l_2_time">{{role_name}}</view>
+				</view>
+			</view>
+			<view class="hp_1_item_r">
+                <image  src="/image/icon/icon_2023_01_06_17.png" class="hp_1_item_r_img" style="width: 16rpx;height: 24rpx;"/>
+			</view>
+		</view>
+    </view>
+
+    <view class="hp_2">
+		<view class="hp_2_center">
+                <block wx:for="{{homePersonal}}" wx:key="index">
+                    <view class="hp_2_item" catch:tap="catchHandler" data-pathstring="{{item.hrefTarget}}" data-title="{{item.text}}">
+                        <view class="hp_2_item_l">
+                            <view class="hp_2_item_l_1">
+                                <image class='hp_2_item_l_h' src='{{item.cls}}'></image>
+                                <!-- <image class='hp_2_item_l_h' wx:if="{{item.id == 2}}" src='/image/icon/icon_2023_01_06_14.png'></image> -->
+                            </view>
+                            <view class="hp_2_item_l_2">
+                               <view class="hp_2_item_l_2_title">{{item.text}}</view>
+                            </view>
+                        </view>
+                        <view class="hp_2_item_r">
+                            <image class='hp_2_item_r_img' src='/image/icon/icon_2023_01_06_13.png'></image>
+                        </view>
+                    </view>
+                </block>
+            </view>
+	</view>
+
+    <view style="height:300rpx;"></view>
+
+    <view class="submit_view">
+        <view class="button_submit" bind:tap="toExit">退出</view>
+    </view>
+
+    <view style="height:120rpx;"></view>
+    
+  </view>
+ </view>
+
+
+    
+    
+
+	<!-- <view class="hp_1">
+		<view class="hp_1_item">
+			<view class="hp_1_item_l">
+				<view class="hp_1_item_l_1">
+					<image class='hp_1_item_l_h' src='/image/icon/icon_2023_01_06_09.png' />
+				</view>
+				<view class="hp_1_item_l_2">
+					<view class="hp_1_item_l_2_title">张章</view>
+					<view class="hp_1_item_l_2_time">卡尤迪</view>
+				</view>
+			</view>
+			<view class="hp_1_item_r">
+                <image bind:tap="toExit" src="/image/icon/icon_2023_01_06_10.png" class="hp_1_item_r_img"/>
+			</view>
+		</view>
+	</view> -->
+
+    <!-- <view class="hp_2">
+		<view class="hp_2_center">
+                <block wx:for="{{homePersonal}}" wx:key="index">
+                    <view class="hp_2_item" catch:tap="catchHandler" data-pathstring="{{item.pagePath}}" data-title="{{item.title}}">
+                        <view class="hp_2_item_l">
+                            <view class="hp_2_item_l_1">
+                                <image class='hp_2_item_l_h' src='/image/icon/icon_2023_01_06_05.png'></image>
+                            </view>
+                            <view class="hp_2_item_l_2">
+                               <view class="hp_2_item_l_2_title">{{item.title}}</view>
+                            </view>
+                        </view>
+                        <view class="hp_2_item_r">
+                            <image class='hp_2_item_r_img' src='/image/icon/icon_2023_01_06_09.png'></image>
+                        </view>
+                    </view>
+                </block>
+            </view>
+	</view> -->
+

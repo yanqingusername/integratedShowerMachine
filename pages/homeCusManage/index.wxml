@@ -1,0 +1,37 @@
+<!-- <wxs src="../../../utils/substring.wxs" module="tools" />
+<cu-custom isBack="{{true}}" bgColor="bg-white">
+  <view slot="backText" bindtap="bindBack"></view>
+  <view slot="content">{{title}}</view>
+</cu-custom> -->
+
+<view class="page">
+     <view class="subject_view" bind:tap="bindAddCus">
+        <view class="subject_view_white"><image  class="icon_add" src="/image/icon/icon_2023_01_06_12.png"/>新增员工信息</view>
+      </view>
+      <!-- icon_2023_01_06_08 -->
+
+      <view class="homeindex_4_1_center">
+                <block wx:for="{{10}}" wx:key="index">
+                    <view class="homeindex_4_1_item">
+                        <view class="homeindex_4_1_item_l">
+                            <view class="homeindex_4_1_item_l_1">
+                                <image class='homeindex_4_1_item_l_h' src='/image/icon/icon_2023_01_06_09.png'></image>
+                            </view>
+                            <view class="homeindex_4_1_item_l_2">
+                               <view class="homeindex_4_1_item_r_title">ID1234</view>
+                               <view class="homeindex_4_1_item_l_2_title">张章</view>
+                               <view class="homeindex_4_1_item_l_2_time">测试</view>
+                            </view>
+                        </view>
+                        <view class="homeindex_4_1_item_r">
+                            <view style="position:relative;display: flex;align-items: center;justify-content: center;flex-direction: column;" catch:tap="bindEditAddress" data-item="{{item}}">
+                              <image style="width:40rpx;height:40rpx;" src="/image/icon/icon_2023_01_06_18.png"></image>
+                              <view style="font-size: 24rpx;color: #333333;margin-top: 6rpx;">编辑</view>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+
+      <view style="height:50rpx;"></view>
+</view>

@@ -1,0 +1,46 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "homeLookDetails",
+          "pathName": "pages/homeLookDetails/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
+          "name": "homePersonalInfo",
+          "pathName": "pages/homePersonalInfo/index",
+          "query": "title=%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "homeEquipmentStatus",
+          "pathName": "pages/homeEquipmentStatus/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "homeEquipmentStatusList",
+          "pathName": "pages/homeEquipmentStatusList/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<view class="page">
+    <view class="v1">
+        <view class="v1_1">
+            <view class="v1_1_1" style="padding:0rpx 0rpx 20rpx 10rpx;">
+                <view class="v1_1_1_1">头像</view>
+                <view class="v1_1_1_2"><image class='v1_1_1_2_1_img' src='/image/icon/icon_2023_01_06_16.png'></image><image class='v1_1_1_2_2_img' src='/image/icon/icon_2023_01_06_19.png'></image></view>
+            </view>
+            <view class="v1_1_1" style="padding:40rpx 0rpx 40rpx 10rpx;">
+                <view class="v1_1_1_1">公司</view>
+                <view class="v1_1_1_3">{{company}}</view>
+            </view>
+            <view class="v1_1_1" style="padding:40rpx 0rpx 10rpx 10rpx;border:none;">
+                <view class="v1_1_1_1">姓名</view>
+                <view class="v1_1_1_3">{{real_name}}</view>
+            </view>
+        </view>
+    </view>
+</view>

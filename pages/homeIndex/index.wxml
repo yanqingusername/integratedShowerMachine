@@ -1,0 +1,116 @@
+<view class="page">
+    <view class="homeindex_1"></view>
+    <view class="homeindex_2">
+        <image class='homeindex_2_img' src='/image/icon/icon_2023_01_06_03_bg.png'></image>
+        <view class='homeindex_view'>
+            <view class='homeindex_2_view'>
+                <view class="homeindex_2_view_1">{{real_name}}</view>
+                <view class="homeindex_2_view_2">
+                    <image class='homeindex_2_view_2_img' src='/image/icon/icon_2023_01_06_06.png'></image>
+                    <view class="homeindex_2_view_1">{{yearmouthday}}</view>
+                </view>
+            </view>
+            <view class="homeindex_2_2_view">{{company}}</view>
+        </view>
+    </view>
+
+    <view class="homeindex_3" catch:tap="bindHandlerClick" data-urlstring="/pages/homeEquipmentStatus/index">
+        <view class="homeindex_3_1">
+            <view class="homeindex_3_title">当前设备</view>
+            <view class="homeindex_3_view">
+                <view class="homeindex_3_view_1">
+                    <view class="homeindex_3_view_1_1">
+                        <image class='homeindex_3_view_1_1_img' src='/image/icon/icon_2023_01_06_04.png'></image>
+                        <view class="homeindex_3_view_1_1_title">运行数量</view>
+                    </view>
+                    <view class="homeindex_3_view_2">15</view>
+                    <view class="homeindex_3_view_3">
+                        <view class="homeindex_3_view_3_1">
+                            <image class='homeindex_3_view_3_img' src='/image/icon/icon_2023_01_06_07.png'></image>
+                            <view class="homeindex_3_view_3_text">男：</view>
+                            <view class="homeindex_3_view_4_text">12</view>
+                            <view class="homeindex_3_view_5_text">台</view>
+                        </view>
+
+                        <view class="homeindex_3_view_3_1" style="margin-top:16rpx">
+                            <image class='homeindex_3_view_3_img' src='/image/icon/icon_2023_01_06_08.png'></image>
+                            <view class="homeindex_3_view_3_text">女：</view>
+                            <view class="homeindex_3_view_4_text">3</view>
+                            <view class="homeindex_3_view_5_text">台</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="homeindex_3_view_1" style="background: #EAF9EA;border: 2px solid #EAF9EA;">
+                    <view class="homeindex_3_view_1_1">
+                        <image class='homeindex_3_view_1_1_img' src='/image/icon/icon_2023_01_06_05.png'></image>
+                        <view class="homeindex_3_view_1_1_title">空闲数量</view>
+                    </view>
+                    <view class="homeindex_3_view_2" style="color:#00B777;">10</view>
+                    <view class="homeindex_3_view_3">
+                        <view class="homeindex_3_view_3_1">
+                            <image class='homeindex_3_view_3_img' src='/image/icon/icon_2023_01_06_07.png'></image>
+                            <view class="homeindex_3_view_3_text">男：</view>
+                            <view class="homeindex_3_view_4_text">8</view>
+                            <view class="homeindex_3_view_5_text">台</view>
+                        </view>
+
+                        <view class="homeindex_3_view_3_1" style="margin-top:10rpx">
+                            <image class='homeindex_3_view_3_img' src='/image/icon/icon_2023_01_06_08.png'></image>
+                            <view class="homeindex_3_view_3_text">女：</view>
+                            <view class="homeindex_3_view_4_text">2</view>
+                            <view class="homeindex_3_view_5_text">台</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    
+    <view class="homeindex_4">
+        <view class="homeindex_4_1">
+            <view class="homeindex_4_1_top" catch:tap="bindHandlerClick" data-urlstring="/pages/homeLookDetails/index">
+                <view class="homeindex_4_1_top_1">
+                    <view class="homeindex_4_1_top_1_t">预警</view>
+                    <view class="homeindex_4_1_top_1_l">{{'100'}}人</view>
+                </view>
+                <view class="homeindex_4_1_top_2">
+                    <view class="homeindex_4_1_top_2_t">查看详情</view>
+                    <image class='homeindex_4_1_top_2_img' src='/image/icon/icon_2023_01_06_09.png'></image>
+                </view>
+            </view>
+
+            <view class="homeindex_4_1_center">
+                <block wx:for="{{10}}" wx:key="index">
+                    <view class="homeindex_4_1_item">
+                        <view class="homeindex_4_1_item_l">
+                            <view class="homeindex_4_1_item_l_1">
+                                <image class='homeindex_4_1_item_l_h' src='/image/icon/icon_2023_01_06_09.png'></image>
+                            </view>
+                            <view class="homeindex_4_1_item_l_2">
+                               <view class="homeindex_4_1_item_l_2_title">张章</view>
+                               <view class="homeindex_4_1_item_l_2_time">2023.01.04 08:30</view>
+                            </view>
+                        </view>
+                        <view class="homeindex_4_1_item_r">
+                            <view class="homeindex_4_1_item_r_title">失败</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            
+            <!-- <block wx:if="{{data_list.length==0}}">
+                <image src="/image/icon/no_info.png" style="width:750rpx;height:auto" mode="widthFix"></image>
+            </block>
+            <block wx:if="{{isEnd}}">
+                <view class="cu-load over"></view>
+            </block>
+            <block wx:else>
+                <view class="cu-load {{loading?'loading':''}}"></view>
+            </block> -->
+            <!-- <view style="height:100rpx;width:0rpx"></view> -->
+            
+        </view>
+    </view>
+
+    <view style="height:40rpx;width:0rpx"></view>
+</view>
