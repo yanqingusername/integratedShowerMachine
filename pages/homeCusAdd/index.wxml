@@ -34,7 +34,7 @@
         <view class="P5 app_flex" style="margin: 16rpx 0rpx 10rpx 0rpx;">
           <view class="P5_1 app_font">岗位</view>
           <view class="section" style="width: 80%;height:84rpx;margin-left:12rpx;font-size:30rpx;display: flex;position: relative;">
-            <picker style="height:100%;margin-top:20rpx;width:90%;" bindchange="bindJobNameChange" range-key="role_name" value="{{jobNameList[categoryIndex].value}}" range="{{jobNameList}}">
+            <picker style="height:100%;margin-top:20rpx;width:90%;" bindchange="bindJobNameChange" range-key="role_name" value="{{jobNameList[categoryIndex].role_name}}" range="{{jobNameList}}">
               <view class="picker" wx:if="{{isShowRegion == 2}}">{{jobNameList[categoryIndex].role_name}}</view>
               <view class="picker" style="color: #B1B1B1;" wx:else>请选择所在岗位</view>
             </picker>
@@ -61,11 +61,21 @@
 
         <view class="P5 app_flex" style="margin: 14rpx 0rpx 10rpx 0rpx;">
           <view class="P5_1 app_font">头像</view>
-          <image wx:if="{{frontPhoto.length > 0}}" src="{{frontPhoto[0]}}" bindtap="preview" data-url="{{frontPhoto[0]}}" mode="widthFix" style="width:300rpx;height:auto;margin-top:10rpx;position:relative;">
+          <image wx:if="{{frontPhoto}}" src="{{frontPhoto}}" bindtap="preview" data-url="{{frontPhoto}}" mode="widthFix" style="width:100rpx;height:100rpx;margin-top:0rpx;position:relative;">
             <image class="delete_img" catch:tap="delview" src="/image/icon/icon_2023_01_06_27.png"></image>
           </image>
-          <text wx:if="{{frontPhoto.length == 0}}" bindtap="ChooseImage" class="cuIcon-cameraadd my_photo"></text>
+          <text wx:else bindtap="ChooseImage" class="cuIcon-cameraadd my_photo"></text>
         </view>
+
+        <!-- <view style="height: 2rpx;background:#DDDDDD;margin: 0rpx 20rpx;"></view>
+
+        <view class="P5 app_flex" style="margin: 14rpx 0rpx 10rpx 0rpx;">
+          <view class="P5_1 app_font">状态</view>
+          <view class="my_photo">
+            <view class="status_view">在职</view>
+            <view class="status_view">离职</view>
+          </view>
+        </view> -->
 
         <view style="height: 10rpx;"></view>
       </view>

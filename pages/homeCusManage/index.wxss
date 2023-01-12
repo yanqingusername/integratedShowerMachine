@@ -78,8 +78,8 @@ page {
 }
 
 .homeindex_4_1_item_l_1{
-  width: 80rpx;
-  height: 80rpx;
+  width: 84rpx;
+  height: 84rpx;
   background: #FAFCFF;
   border: 1px solid #EAF4FE;
   border-radius: 100%;

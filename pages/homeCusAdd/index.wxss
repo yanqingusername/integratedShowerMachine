@@ -265,11 +265,20 @@ page {
 }
 
 .button_delete {
-  margin-top: 60rpx;
-  text-align: center;
-  font-size: 28rpx;
-  font-weight: 400;
-  color: #666666;
+  margin-top: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 670rpx;
+  height: 88rpx;
+  background: #EEEEEE;
+  border-radius: 44rpx;
+  border: 2rpx solid #EEEEEE;
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #327FF6;
+  left: 5%;
+  position: relative;
 }
 
 .div_policy {
@@ -309,7 +318,12 @@ page {
   align-self: center;
   font-size: 38rpx;
   color: #999999;
-  width: 400rpx;
+  width: 80%;
+    height: 42px;
+    margin-left: 6px;
+    display: flex;
+    position: relative;
+    align-items: center;
 }
 
 .delete_img{

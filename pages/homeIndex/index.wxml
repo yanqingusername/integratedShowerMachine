@@ -71,7 +71,7 @@
             <view class="homeindex_4_1_top" catch:tap="bindHandlerClick" data-urlstring="/pages/homeLookDetails/index">
                 <view class="homeindex_4_1_top_1">
                     <view class="homeindex_4_1_top_1_t">预警</view>
-                    <view class="homeindex_4_1_top_1_l">{{'100'}}人</view>
+                    <view class="homeindex_4_1_top_1_l">{{count}}人</view>
                 </view>
                 <view class="homeindex_4_1_top_2">
                     <view class="homeindex_4_1_top_2_t">查看详情</view>
@@ -79,29 +79,29 @@
                 </view>
             </view>
 
-            <view class="homeindex_4_1_center">
-                <block wx:for="{{10}}" wx:key="index">
+            <view class="homeindex_4_1_center" wx:if="{{iwadomListinfo.length>0}}">
+                <block wx:for="{{iwadomListinfo}}" wx:key="index">
                     <view class="homeindex_4_1_item">
                         <view class="homeindex_4_1_item_l">
                             <view class="homeindex_4_1_item_l_1">
-                                <image class='homeindex_4_1_item_l_h' src='/image/icon/icon_2023_01_06_09.png'></image>
+                                <image class='homeindex_4_1_item_l_h' src='{{item.head_url}}'></image>
                             </view>
                             <view class="homeindex_4_1_item_l_2">
-                               <view class="homeindex_4_1_item_l_2_title">张章</view>
-                               <view class="homeindex_4_1_item_l_2_time">2023.01.04 08:30</view>
+                               <view class="homeindex_4_1_item_l_2_title">{{item.real_name}}<view class="homeindex_4_1_item_l_2_title_l {{item.workType== 0 ? 'homeindex_4_1_item_l_2_title_l_1':''}}">{{item.workType== 0 ? '上班' : '下班'}}</view></view>
+                               <view class="homeindex_4_1_item_l_2_time">{{item.create_time}}</view>
                             </view>
                         </view>
                         <view class="homeindex_4_1_item_r">
-                            <view class="homeindex_4_1_item_r_title">失败</view>
+                            <view class="homeindex_4_1_item_r_title" style="color: {{item.status == 1 ? '#409DFF' : item.status == 2 ? '#FF2C2B' : '#00BD6A'}};">{{item.status == 1 ? '淋浴成功' : item.status == 2 ? '淋浴失败' : '淋浴中'}}</view>
                         </view>
                     </view>
                 </block>
             </view>
             
-            <!-- <block wx:if="{{data_list.length==0}}">
-                <image src="/image/icon/no_info.png" style="width:750rpx;height:auto" mode="widthFix"></image>
+             <block wx:if="{{iwadomListinfo.length==0}}">
+                <view class="homeindex_4_1_top_2_t" style="display: flex;align-items: center;justify-content: center;padding: 120rpx;">暂无数据</view>
             </block>
-            <block wx:if="{{isEnd}}">
+            <!-- <block wx:if="{{isEnd}}">
                 <view class="cu-load over"></view>
             </block>
             <block wx:else>

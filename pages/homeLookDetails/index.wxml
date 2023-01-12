@@ -4,9 +4,9 @@
             <view class="hld_1_1_l" style="padding-left: 20rpx;">
                 <view class="hld_1_1_l_1">开始日期</view>
                 <view class="hld_1_1_l_2">
-                    <picker mode="date" value="{{startDate}}" start="2020-01-01" end="{{yearmouthday}}" bindchange="bindStartDateChange">
+                    <picker mode="date" value="{{start_time}}" start="2020-01-01" end="{{yearmouthday}}" bindchange="bindStartTimeChange">
                         <view style="display: flex;align-items: center;">
-                            <view class="picker">{{startDate}}</view>
+                            <view class="picker">{{start_time}}</view>
                             <image class='hld_1_1_l_2_img' src='/image/icon/icon_2023_01_06_13.png'></image>
                         </view>
                     </picker>
@@ -15,9 +15,9 @@
             <view class="hld_1_1_l">
                 <view class="hld_1_1_l_1">结束日期</view>
                 <view class="hld_1_1_l_2">
-                    <picker mode="date" value="{{endDate}}" start="2020-01-01" end="{{yearmouthday}}" bindchange="bindEndDateChange">
+                    <picker mode="date" value="{{end_time}}" start="2020-01-01" end="{{yearmouthday}}" bindchange="bindEndTimeChange">
                         <view style="display: flex;align-items: center;">
-                            <view class="picker">{{endDate}}</view>
+                            <view class="picker">{{end_time}}</view>
                             <image class='hld_1_1_l_2_img' src='/image/icon/icon_2023_01_06_13.png'></image>
                         </view>
                     </picker>
@@ -69,24 +69,24 @@
             </view>
 
             <view class="homeindex_4_1_center">
-                <block wx:for="{{10}}" wx:key="index">
+                <block wx:for="{{iwadomListinfo}}" wx:key="index">
                     <view class="homeindex_4_1_item">
                         <view class="homeindex_4_1_item_top">
-                            <view class="homeindex_4_1_item_top_title">设备编号：1</view>
-                            <view class="homeindex_4_1_item_top_title">一消-男</view>
+                            <view class="homeindex_4_1_item_top_title">设备编号：{{item.sn}}</view>
+                            <view class="homeindex_4_1_item_top_title">{{item.address}}</view>
                         </view>
                         <view class="homeindex_4_1_item_center">
                             <view class="homeindex_4_1_item_l">
                                 <view class="homeindex_4_1_item_l_1">
-                                    <image class='homeindex_4_1_item_l_h' src='/image/icon/icon_2023_01_06_09.png'></image>
+                                    <image class='homeindex_4_1_item_l_h' src='{{item.head_url}}'></image>
                                 </view>
                                 <view class="homeindex_4_1_item_l_2">
-                                <view class="homeindex_4_1_item_l_2_title">张章<view class="homeindex_4_1_top_1_l {{index==2 ? 'homeindex_4_1_top_1_l_1':''}}">上班</view></view>
+                                <view class="homeindex_4_1_item_l_2_title">{{item.real_name}}<view class="homeindex_4_1_top_1_l {{item.workType== 0 ? 'homeindex_4_1_top_1_l_1':''}}">{{item.workType== 0 ? '上班' : '下班'}}</view></view>
                                 <view class="homeindex_4_1_item_l_2_time">2023.01.04 08:30</view>
                                 </view>
                             </view>
                             <view class="homeindex_4_1_item_r">
-                                <view class="homeindex_4_1_item_r_title">淋浴成功</view>
+                                <view class="homeindex_4_1_item_r_title" style="color: {{item.status == 1 ? '#409DFF' : item.status == 2 ? '#FF2C2B' : '#00BD6A'}};">{{item.status == 1 ? '淋浴成功' : item.status == 2 ? '淋浴失败' : '淋浴中'}}</view>
                             </view>
                         </view>
                     </view>
@@ -112,12 +112,15 @@
     </view>
 
     <view class="" wx:if="{{isShowResult}}">
+        <view class="show_result_view active" style="padding-bottom:20rpx;">全部</view>
+        <view class="show_result_view active" style="padding-bottom:20rpx;">淋浴中</view>
         <view class="show_result_view active" style="padding-bottom:20rpx;">淋浴成功</view>
         <view class="show_result_view" style="border: none;padding-top:20rpx;">淋浴失败</view>
     </view>
 
     <view class="" wx:if="{{isShowWork}}">
-        <view class="show_result_view active" style="padding-bottom:20rpx;">上班</view>
+        <view class="show_result_view" style="padding-bottom:20rpx;">全部</view>
+        <view class="show_result_view" style="padding-bottom:20rpx;">上班</view>
         <view class="show_result_view" style="border: none;padding-top:20rpx;">下班</view>
     </view>
 </view>

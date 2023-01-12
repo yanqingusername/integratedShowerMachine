@@ -129,10 +129,17 @@ Page({
       value: '其他',
       selected: false,
       title: '其他'
-     }]
+     }],
+     page: 1,
+        limit: 10,
+        iwadomListinfo: [],
+        start_time: "", //开始时间，第二个接口用  默认当前
+        end_time: "", //结束时间 同开始时间
+        status: '', //洗消状态 1成功 2失败 0沐浴中
+        workType:"", //上下班 0是上班 1是下班  ""全部
+        staffids: '', //员工id以','分割
   },
   onShow: function () {
-    // this.getAllCus();
   },
   onLoad: function (options) {
     let that = this;
@@ -141,7 +148,9 @@ Page({
       title: '淋浴信息记录'
     });
 
-    this.currentTime()
+    this.currentTime();
+
+    this.getIwadomlistinfo();
 
     this.pig_component = this.selectComponent('#mychart-line');
 
@@ -153,26 +162,41 @@ Page({
       }
     that.chartInit(xdata,ydata,axisLabel)
   },
-  getAllCus() {
-    let that = this;
-    let data = {
-      openid: app.globalData.openid,
+  getIwadomlistinfo:function(){
+    var that = this;
+    var data = {
+        id: app.globalData.userInfo.id,  //登录人的id
+        start_time: this.data.startDate, //开始时间，第二个接口用  默认当前
+        end_time: this.data.endDate, //结束时间 同开始时间
+        status: this.data.status, //洗消状态 1成功 2失败 0沐浴中
+        workType: this.data.workType, //上下班 0是上班 1是下班  ""全部
+        staffids: this.data.staffids, //员工id以','分割
+        page: this.data.page,
+        limit: this.data.limit
     }
-    request.request_get('/Newacid/getShoppingAddress.hn', data, function (res) {
-      console.info('回调', res)
-      if (res) {
-        if (res.success) {
-          that.setData({
-            dataList: res.msg
-          })
-        } else {
-          box.showToast(res.msg);
-        }
-      } else {
-        box.showToast("网络不稳定，请重试");
-      }
+
+    console.log('---->:',data)
+
+    request.request_get('/iwadom/getIwadomlistinfo.hn', data, function (res) {
+        if (res) {
+            if (res.success) {
+              if (that.data.page == 1) {
+                that.setData({
+                    iwadomListinfo: res.data,
+                  page: (res.data && res.data.length > 0) ? that.data.page + 1 : that.data.page
+                });
+              } else {
+                that.setData({
+                    iwadomListinfo: that.data.iwadomListinfo.concat(res.data || []),
+                  page: (res.data && res.data.length > 0) ? that.data.page + 1 : that.data.page,
+                });
+              }
+            } else {
+              box.showToast(res.msg);
+            }
+          }
     })
-  },
+},
   onReachBottom: function () {
 
   },
@@ -190,35 +214,39 @@ Page({
       day = "0" + day
     }
     let curtime = tempTime.getFullYear() + "年" + (month) + "月" + day + "日";
+    let curDate = tempTime.getFullYear() + "-" + (month) + "-" + day;
     console.log('currentTime' + curtime);
     this.setData({
       yearmouthday: curtime,
-      startDate: curtime,
-      endDate: curtime
+      start_time: curtime,
+      end_time: curtime,
+      startDate: curDate,
+      endDate: curDate
     })
   },
-  formatYear(datestring,typestring){
+  formatYear(datestring,typestring,datetypestring){
     if(datestring){
       let dateList = datestring.split('-');
       console.log('---->:',dateList)
-      let startDate = dateList[0] + "年" +dateList[1] + "月" + dateList[2] + "日";
+      let start_time = dateList[0] + "年" +dateList[1] + "月" + dateList[2] + "日";
       this.setData({
-        [typestring]: startDate
+        [typestring]: start_time,
+        [datetypestring]: datestring
       })
     }
   },
-  bindStartDateChange: function (e) {
+  bindStartTimeChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     let datestring = e.detail.value;
     if(datestring){
-      this.formatYear(datestring,'startDate');
+      this.formatYear(datestring,'start_time','startDate');
     }
   },
-  bindEndDateChange: function (e) {
+  bindEndTimeChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     let datestring = e.detail.value;
     if(datestring){
-      this.formatYear(datestring,'endDate');
+      this.formatYear(datestring,'end_time','endDate');
     }
   },
   bingNameHandler(e){

@@ -15,6 +15,10 @@ Page({
         womanRuningsum: '0',
         manfreesum: '0',
         womanfreesum: '0',
+        page: 1,
+        limit: 10,
+        iwadomListinfo: [],
+        count: 0
     },
 
     onLoad:function(){
@@ -25,7 +29,11 @@ Page({
         this.currentTime()
     },
     onShow:function(){
+        this.setData({
+            page: 1
+        });
         this.getdeviceRun();
+        this.getIwadomlistinfo();
     },
     /**
      * 当前日期
@@ -76,6 +84,42 @@ Page({
                 url: urlstring
             });
         }
-    }
-
+    },
+    onReachBottom: function () {
+        this.getIwadomlistinfo();
+      },
+    getIwadomlistinfo:function(){
+        var that = this;
+        var data = {
+            id: app.globalData.userInfo.id,  //登录人的id
+            start_time: "", //开始时间，第二个接口用  默认当前
+            end_time: "", //结束时间 同开始时间
+            status: '2', //洗消状态 1成功 2失败 0沐浴中
+            workType:"", //上下班 0是上班 1是下班  ""全部
+            staffids: '', //员工id以','分割
+            page: this.data.page,
+            limit: this.data.limit
+        }
+        request.request_get('/iwadom/getIwadomlistinfo.hn', data, function (res) {
+            if (res) {
+                if (res.success) {
+                  if (that.data.page == 1) {
+                    that.setData({
+                        count: res.count,
+                        iwadomListinfo: res.data,
+                      page: (res.data && res.data.length > 0) ? that.data.page + 1 : that.data.page
+                    });
+                  } else {
+                    that.setData({
+                        count: res.count,
+                        iwadomListinfo: that.data.iwadomListinfo.concat(res.data || []),
+                      page: (res.data && res.data.length > 0) ? that.data.page + 1 : that.data.page,
+                    });
+                  }
+                } else {
+                  box.showToast(res.msg);
+                }
+              }
+        })
+    },
 })

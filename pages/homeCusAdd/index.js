@@ -15,7 +15,7 @@ Page({
     password: '',
     job_name: '',
     job_id: '',
-    frontPhoto: [],
+    frontPhoto: "",
     jobNameList: [],
     categoryIndex: 0,
     isShowRegion: 1,
@@ -24,22 +24,80 @@ Page({
     genderIndex: 0,
     gender: '',
     isShowGender: 1,
-    isEditCus: 1
+    isEditCus: 1,  //  1-新增   2-编辑
+    uid: ''
   },
   onShow: function () {
     this.getRoleinfo();
   },
   onLoad: function (options) {
     this.setData({
-      isEditCus: options.isEditCus || 1
+      isEditCus: options.isEditCus || 1,
+      uid: options.uid
     });
     wx.setNavigationBarTitle({
       title: "新增员工信息"
     })
+
+  },
+  getuserinfo() {
+    let that = this;
+    let params = {
+      id: this.data.uid
+    }
+
+    request.request_get('/personnelManagement/getuserinfo.hn', params, function (res) {
+      if (res) {
+        if (res.success) {
+          let userList = res.data;
+          if(userList && userList.length > 0){
+            let userInfo = userList[0];
+            that.setData({
+              name: userInfo.real_name,
+              job_number: userInfo.job_number,
+              job_phone: userInfo.phone,
+              password: userInfo.password,
+              frontPhoto: userInfo.head_url
+            });
+
+            let job_id = userInfo.roleId;
+            let job_name_1 = "";
+            let categoryIndex = 0;
+            if(that.data.jobNameList.length > 0){
+              for(let i = 0; i < that.data.jobNameList.length; i++){
+                if(job_id == that.data.jobNameList[i].id){
+                  job_name_1 = that.data.jobNameList[i].role_name;
+                  categoryIndex = i;
+                  break;
+                }
+              }
+            }
+            let gender = userInfo.gender == 0 ? '男' : '女';
+            let genderIndex = userInfo.gender == 0 ? '0' : '1';
+
+            that.setData({
+              job_name: job_name_1,
+              job_id: job_id,
+              categoryIndex: categoryIndex,
+              gender: gender,
+              genderIndex: genderIndex,
+              isShowGender: 2,
+              isShowRegion: 2
+            });
+
+            that.checkSubmitStatus();
+          }
+        } else {
+          box.showToast(res.msg);
+        }
+      } else {
+        box.showToast("网络不稳定，请重试");
+      }
+    });
   },
   //保存按钮禁用判断
   checkSubmitStatus: function (e) {
-    if (this.data.name != '' && this.data.job_number != '' && this.data.job_phone != '' && this.data.password != '' && this.data.job_name != '' && this.data.job_id != '' && this.data.frontPhoto.length > 0 && this.data.gender != '') {
+    if (this.data.name != '' && this.data.job_number != '' && this.data.job_phone != '' && this.data.password != '' && this.data.job_name != '' && this.data.job_id != '' && this.data.frontPhoto != '' && this.data.gender != '') {
       this.setData({
         submitState: false
       })
@@ -105,7 +163,6 @@ Page({
   },
   bindPickerChangeGender: function (e) {
     var that = this;
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       genderIndex: e.detail.value,
       gender: that.data.genderList[e.detail.value],
@@ -116,6 +173,7 @@ Page({
   // 头像上传
   ChooseImage: function () {
     var that = this;
+    let data = [];
     that.setData({
       imgFlag: true
     })
@@ -126,38 +184,29 @@ Page({
       success: function (res) {
         var filePath = res.tempFilePaths;
 
-        // for (let i = 0; i < filePath.length; i++) {
-        //   wx.uploadFile({
-        //     url: 'https://monitor.coyotebio-lab.com:8443/HM/api/upload.hn',  // 正式服务器
-        //     filePath: filePath[i],
-        //     name: 'imageFile',
-        //     formData: data,
-        //     header: {
-        //       "chartset": "utf-8"
-        //     },
-        //     success: function (returnRes) {
-        //       console.log(returnRes)
-        //       let data = JSON.parse(returnRes.data)
-        //       console.log(data.msg)
-        //       let imgList = [];
-        //       let imgArr = that.data.img_arr;
-        //       for (let i = 0; i < imgArr.length; i++) {
-        //         imgList.push(imgArr[i])
-        //       }
-        //       imgList.push(data.msg)
-        //       that.setData({
-        //         frontPhoto: imgList
-        //       })
-        //       that.checkSubmitStatus();
-        //       console.log("imgList=" + imgList)
-        //     },
-        //   })
-        // }
-
-        that.setData({
-          frontPhoto: frontPhoto
-        })
-        that.checkSubmitStatus();
+        for (let i = 0; i < filePath.length; i++) {
+          wx.uploadFile({
+            url: 'http://syrdev.coyotebio-lab.com:8080/IntelligentCreature/personnelManagement/upload.hn',  // 正式服务器
+            filePath: filePath[i],
+            name: 'imageFile',
+            formData: data,
+            header: {
+              "chartset": "utf-8"
+            },
+            success: function (returnRes) {
+              let data = JSON.parse(returnRes.data)
+              if(data){
+                if(data.success){
+                  let msg = data.msg;
+                  that.setData({
+                    frontPhoto: msg
+                  })
+                  that.checkSubmitStatus();
+                }
+              }
+            },
+          })
+        }
       }
     })
   },
@@ -175,7 +224,7 @@ Page({
   },
   delview: function () {
     this.setData({
-      frontPhoto: []
+      frontPhoto: ""
     });
     this.checkSubmitStatus();
   },
@@ -191,6 +240,10 @@ Page({
           that.setData({
             jobNameList: res.data
           });
+
+          if(that.data.uid){
+            that.getuserinfo();
+          }
         } else {
           box.showToast(res.msg);
         }
@@ -201,14 +254,14 @@ Page({
   },
   submitBuffer() {
     let that = this;
-    let name = this.data.name;
-    let job_number = this.data.job_number;
-    let job_phone = this.data.job_phone;
-    let password = this.data.password;
-    let job_name = this.data.job_name;
-    let job_id = this.data.job_id;
-    let frontPhoto = this.data.frontPhoto;
-    let gender = this.data.gender;
+    let name = this.data.name; //姓名
+    let job_number = this.data.job_number; //工号
+    let job_phone = this.data.job_phone;  //手机号
+    let password = this.data.password;  //密码
+    let job_name = this.data.job_name;  //岗位id
+    let job_id = this.data.job_id;   //岗位id
+    let frontPhoto = this.data.frontPhoto;  //图片
+    let gender = this.data.gender; //性别
 
 
 
@@ -247,34 +300,33 @@ Page({
       return;
     }
 
-    if (frontPhoto.length == 0) {
+    if (!frontPhoto) {
       box.showToast("请上传头像");
       return;
     }
 
-    wx.getFileSystemManager().readFile({ // 文件管理系统按照base64方式读取生成的图片
-      filePath: frontPhoto[0], //选择图片返回的相对路径
-      encoding: 'binary', //编码格式
-      success: res => { //成功的回调
-        console.log('------->:',res)
-  　　 }
-  })
-
     let params = {
-      company_serial: app.globalData.userInfo.company_serial,
+      company_serial: app.globalData.userInfo.company_serial, //公司id
+      company: app.globalData.userInfo.company, //公司
       real_name: name, //姓名
       gender: gender == '男' ? '0' : '1', //男女
       phone: job_phone, //手机号
       job_number: job_number, //工号
       roleId: job_id, //岗位id
       password: password, //密码
+      fileUrl: frontPhoto
     }
 
     console.log('---->:',params)
-    console.log('---->:',frontPhoto[0])
-    return
 
-    request.request_get('/personnelManagement/adduserinfo.hn', params, function (res) {
+    let url = "/personnelManagement/adduserinfo.hn";
+    if(this.data.isEditCus == 2){
+      params.id = this.data.uid;
+      params.status = '0';
+      url = "/personnelManagement/edituserinfo.hn";
+    }
+
+    request.request_get(url, params, function (res) {
       console.info('回调', res)
       if (res) {
         if (res.success) {
@@ -289,6 +341,35 @@ Page({
       }
     })
 
-  }
+  },
+  bindDeleteClick(e) {
+    let that = this;
+    let id = this.data.uid;
+    if (id) {
+      wx.showModal({
+        title: '确认删除该员工？',
+        content: '删除后无法恢复',
+        success: function (res) {
+          if (res.confirm) {
+            var data = {
+              id: id,
+            }
+            request.request_get('/personnelManagement/deleteEmployee.hn', data, function (res) {
+              if (res) {
+                if (res.success) {
+                  box.showToast(res.msg);
+                  wx.navigateBack({
+                    delta: 1,
+                  });
+                } else {
+                  box.showToast(res.msg);
+                }
+              }
+            })
+          }
+        }
+      })
+    }
+  },
 
 })

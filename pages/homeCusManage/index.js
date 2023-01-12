@@ -9,14 +9,6 @@ Page({
     limit: 10,
     employeesList: [],
     title: "",
-    dataList: [
-      {
-        "id": 1,
-        "name":"张三",
-        "custom": "测试",
-        "headerimg": ''
-      }
-    ],
   },
   onLoad: function (options) {
     this.setData({
@@ -67,5 +59,13 @@ Page({
     wx.navigateTo({
       url:`/pages/homeCusAdd/index`
     });
-  }
+  },
+  bindEditCus(e){
+    let uid = e.currentTarget.dataset.uid;
+    if(uid){
+      wx.navigateTo({
+        url:`/pages/homeCusAdd/index?isEditCus=2&uid=${uid}`
+      });
+    }
+  },
 });
