@@ -9,6 +9,12 @@ Page({
         company: "",
 		timestamp:new Date().getTime(),
         yearmouthday:"",
+        freesum: '0',
+        runningsum: '0',
+        manRuningsum: '0',
+        womanRuningsum: '0',
+        manfreesum: '0',
+        womanfreesum: '0',
     },
 
     onLoad:function(){
@@ -19,7 +25,7 @@ Page({
         this.currentTime()
     },
     onShow:function(){
-        
+        this.getdeviceRun();
     },
     /**
      * 当前日期
@@ -40,17 +46,23 @@ Page({
             yearmouthday: curtime
         })
     },
-    getUntreatedAlarmNum:function(){
+    getdeviceRun:function(){
         var that = this;
         var data = {
-            pig_farm: app.globalData.userInfo.pig_farm_id
+            company_serial: app.globalData.userInfo.company_serial
         }
-        request.request_get('/pigProjectApplet/getUntreatedAlarmNum.hn', data, function (res) {
+        request.request_get('/equipmentManagement/getdeviceRun.hn', data, function (res) {
             console.info('回调', res)
             if (res) {
                 if (res.success) {
-                    var alarmNum = res.msg;
-                    that.setData({alarmNum:alarmNum});
+                    that.setData({
+                        freesum: res.freesum, //空闲总数
+                        runningsum: res.runningsum, //运行总数
+                        manRuningsum: res.manRuningsum, //男运行数
+                        womanRuningsum: res.womanRuningsum, //女运行数
+                        manfreesum: res.manfreesum, //男空闲数
+                        womanfreesum: res.womanfreesum //女空闲数
+                    });
                 } else {
                     box.showToast(res.msg)
                 }

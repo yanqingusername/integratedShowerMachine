@@ -119,6 +119,8 @@ margin-top: 8rpx;
 }
 
 .homeindex_4_1_item_r_title{
+  display: flex;
+    align-items: center;
   font-size: 32rpx;
 font-family: PingFangSC-Medium, PingFang SC;
 font-weight: 500;

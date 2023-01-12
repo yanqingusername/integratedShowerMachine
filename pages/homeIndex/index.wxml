@@ -23,19 +23,19 @@
                         <image class='homeindex_3_view_1_1_img' src='/image/icon/icon_2023_01_06_04.png'></image>
                         <view class="homeindex_3_view_1_1_title">运行数量</view>
                     </view>
-                    <view class="homeindex_3_view_2">15</view>
+                    <view class="homeindex_3_view_2">{{runningsum}}</view>
                     <view class="homeindex_3_view_3">
                         <view class="homeindex_3_view_3_1">
                             <image class='homeindex_3_view_3_img' src='/image/icon/icon_2023_01_06_07.png'></image>
                             <view class="homeindex_3_view_3_text">男：</view>
-                            <view class="homeindex_3_view_4_text">12</view>
+                            <view class="homeindex_3_view_4_text">{{manRuningsum}}</view>
                             <view class="homeindex_3_view_5_text">台</view>
                         </view>
 
                         <view class="homeindex_3_view_3_1" style="margin-top:16rpx">
                             <image class='homeindex_3_view_3_img' src='/image/icon/icon_2023_01_06_08.png'></image>
                             <view class="homeindex_3_view_3_text">女：</view>
-                            <view class="homeindex_3_view_4_text">3</view>
+                            <view class="homeindex_3_view_4_text">{{womanRuningsum}}</view>
                             <view class="homeindex_3_view_5_text">台</view>
                         </view>
                     </view>
@@ -45,19 +45,19 @@
                         <image class='homeindex_3_view_1_1_img' src='/image/icon/icon_2023_01_06_05.png'></image>
                         <view class="homeindex_3_view_1_1_title">空闲数量</view>
                     </view>
-                    <view class="homeindex_3_view_2" style="color:#00B777;">10</view>
+                    <view class="homeindex_3_view_2" style="color:#00B777;">{{freesum}}</view>
                     <view class="homeindex_3_view_3">
                         <view class="homeindex_3_view_3_1">
                             <image class='homeindex_3_view_3_img' src='/image/icon/icon_2023_01_06_07.png'></image>
                             <view class="homeindex_3_view_3_text">男：</view>
-                            <view class="homeindex_3_view_4_text">8</view>
+                            <view class="homeindex_3_view_4_text">{{manfreesum}}</view>
                             <view class="homeindex_3_view_5_text">台</view>
                         </view>
 
                         <view class="homeindex_3_view_3_1" style="margin-top:10rpx">
                             <image class='homeindex_3_view_3_img' src='/image/icon/icon_2023_01_06_08.png'></image>
                             <view class="homeindex_3_view_3_text">女：</view>
-                            <view class="homeindex_3_view_4_text">2</view>
+                            <view class="homeindex_3_view_4_text">{{womanfreesum}}</view>
                             <view class="homeindex_3_view_5_text">台</view>
                         </view>
                     </view>

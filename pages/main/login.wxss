@@ -2,9 +2,10 @@ page{
     background-color: #FFFFFF;
 }
 .P1{
-    width:604rpx;
+    /* width:604rpx;
     margin-right:73rpx;
-    margin-left:73rpx;
+    margin-left:73rpx; */
+    padding: 0rpx 60rpx;
 }
 .P2{
     position:relative;
@@ -26,8 +27,9 @@ page{
     font-family: "SHSCN_Regular";
     align-self: center;
     font-size: 32rpx;
-    color: #999999;
-    width: 500rpx;
+    width: 100%;
+font-family: PingFangSC-Regular, PingFang SC;
+font-weight: 400;
 }
 .bt_code{
     align-self: center;
@@ -50,14 +52,45 @@ page{
     display: flex;
     Justify-content:center;
     align-items:center;
-    width: 453rpx;
-    height: 90rpx;
+    width: 630rpx;
+height: 92rpx;
+background: #409DFF;
+border-radius: 48rpx;
     opacity:1.0;
-    background-color:#327FF6;
-    border-radius: 45rpx;
 }
 .font_login{
     font-family: "SHSCN_Regular";
     font-size: 32rpx;
     color: #ffffff;
+}
+
+.login_view{
+    width: 100%;
+    /* height: 622px; */
+    background: #FFFFFF;
+    border-radius: 20px 20px 0px 0px;
+    margin-top: -58rpx;
+    z-index: 12;
+    position: relative;
+}
+
+.login_view_title{
+    font-size: 36rpx;
+font-family: PingFangSC-Medium, PingFang SC;
+font-weight: 500;
+color: #333333;
+}
+
+.login_view_phone{
+    display: flex;
+    flex-direction: column;
+    padding-top: 40rpx;
+}
+
+.login_view_input{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    height: 100rpx;
+    border-bottom: 1px solid #EEEEEE;
 }

@@ -3,10 +3,12 @@
 */
 
 // 参数配置
-//var apiurl = 'http://dev6.coyotebio-lab.com//wisdomLivestock'   // 测试服务器
-// var apiurl = 'https://www.prohealth-wch.com:8443/wisdomLivestock'    //正式服务器
+// var apiurl = 'http://ygldev.coyotebio-lab.com/IntelligentCreature'   // 测试服务器
+// var apiurl = 'https://www.prohealth-wch.com:8443/IntelligentCreature'    //正式服务器
 
 var apiurl = 'http://192.168.81.90:8080/IntelligentCreature'     // 本地测试
+
+
 
 // 常用request get封装-异步
 function request_get(controller, data, cb) {

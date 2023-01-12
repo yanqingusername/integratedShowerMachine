@@ -1,8 +1,3 @@
-<!-- <cu-custom isBack="{{true}}" bgColor="bg-white">
-  <view slot="backText" bindtap="bindBack"></view>
-  <view slot="content">{{title}}</view>
-</cu-custom> -->
-
 <view class="page">
       <view class="medWhite">
         <view style="height: 2rpx;"></view>
@@ -21,17 +16,17 @@
 
         <view class="P5 app_flex" style="margin: 16rpx 0rpx 10rpx 0rpx;">
           <view class="P5_1 app_font">手机号</view>
-          <input class="P5_2 " style="position:relative;right:20rpx" type="number" placeholder="请输入联系人手机号" placeholder-class="place_style" bindinput="bindPhone" maxlength="11" value="{{address_phone}}"></input>
-          <view id="clear_1" style="padding:16rpx;right: -20rpx;" wx:if="{{address_phone}}" catch:tap="clearPhone">
+          <input class="P5_2 " style="position:relative;right:20rpx" type="number" placeholder="请输入手机号" placeholder-class="place_style" bindinput="bindPhone" maxlength="11" value="{{job_phone}}"></input>
+          <!-- <view id="clear_1" style="padding:16rpx;right: -20rpx;" wx:if="{{job_phone}}" catch:tap="clearPhone">
             <image class="icon_clear" src="../../../images/icon_clear.png"></image>
-          </view>
+          </view> -->
         </view>
 
         <view style="height: 2rpx;background:#DDDDDD;margin: 0rpx 20rpx;"></view>
 
         <view class="P5 app_flex" style="margin: 14rpx 0rpx 10rpx 0rpx;">
           <view class="P5_1 app_font">密码</view>
-          <input class="P5_2 app_font" placeholder="请输入密码" placeholder-class="place_style" bindinput="bindJobNumber" style="position:relative;right:20rpx" value="{{job_number}}"></input>
+          <input class="P5_2 app_font" placeholder="请输入密码" placeholder-class="place_style" bindinput="bindPassword" style="position:relative;right:20rpx" value="{{password}}"></input>
         </view>
 
         <view style="height: 2rpx;background:#DDDDDD;margin: 0rpx 20rpx;"></view>
@@ -39,8 +34,8 @@
         <view class="P5 app_flex" style="margin: 16rpx 0rpx 10rpx 0rpx;">
           <view class="P5_1 app_font">岗位</view>
           <view class="section" style="width: 80%;height:84rpx;margin-left:12rpx;font-size:30rpx;display: flex;position: relative;">
-            <picker style="height:100%;margin-top:20rpx;width:90%;" bindchange="bindJobNameChange" range-key="name" value="{{jobNameList[categoryIndex].value}}" range="{{jobNameList}}">
-              <view class="picker" wx:if="{{isShowRegion == 2}}">{{jobNameList[categoryIndex].name}}</view>
+            <picker style="height:100%;margin-top:20rpx;width:90%;" bindchange="bindJobNameChange" range-key="role_name" value="{{jobNameList[categoryIndex].value}}" range="{{jobNameList}}">
+              <view class="picker" wx:if="{{isShowRegion == 2}}">{{jobNameList[categoryIndex].role_name}}</view>
               <view class="picker" style="color: #B1B1B1;" wx:else>请选择所在岗位</view>
             </picker>
             <view style="margin-right:0rpx;align-items: center;display: flex;position: absolute;right: 16rpx;top: 30rpx;">
@@ -65,8 +60,10 @@
         <view style="height: 2rpx;background:#DDDDDD;margin: 0rpx 20rpx;"></view>
 
         <view class="P5 app_flex" style="margin: 14rpx 0rpx 10rpx 0rpx;">
-          <view class="P5_1 app_font">大头照</view>
-          <image wx:if="{{frontPhoto.length > 0}}" src="{{frontPhoto[0]}}" bindtap="preview" data-url="{{frontPhoto[0]}}" mode="widthFix" style="width:300rpx;height:auto;margin-top:10rpx"></image>
+          <view class="P5_1 app_font">头像</view>
+          <image wx:if="{{frontPhoto.length > 0}}" src="{{frontPhoto[0]}}" bindtap="preview" data-url="{{frontPhoto[0]}}" mode="widthFix" style="width:300rpx;height:auto;margin-top:10rpx;position:relative;">
+            <image class="delete_img" catch:tap="delview" src="/image/icon/icon_2023_01_06_27.png"></image>
+          </image>
           <text wx:if="{{frontPhoto.length == 0}}" bindtap="ChooseImage" class="cuIcon-cameraadd my_photo"></text>
         </view>
 
@@ -87,7 +84,7 @@
 
       <view class="button_submit" wx:else bind:tap="submitBuffer">保存</view>
 
-      <view class="button_delete" wx:if="{{isAddAddress == 2}}" bind:tap="bindDeleteClick">删除</view>
+      <view class="button_delete" wx:if="{{isEditCus == 2}}" bind:tap="bindDeleteClick">删除</view>
 </view>
 
 <!-- 删除弹框 -->

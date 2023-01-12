@@ -4,72 +4,77 @@ const utils = require('../../utils/utils.js')
 const request = require('../../utils/request.js')
 const box = require('../../utils/box.js')
 
-let chart = null;
+// let chart = null;
 
-function initChart(canvas, width, height, dpr) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
+// function initChart(canvas, width, height, dpr) {
+//   chart = echarts.init(canvas, null, {
+//     width: width,
+//     height: height,
+//     devicePixelRatio: dpr // new
+//   });
+//   canvas.setChart(chart);
 
-  var option = {
-    title: {
-      text: '测试下面legend的红色区域不应被裁剪',
-      left: 'center'
-    },
-    legend: {
-      data: ['A', 'B', 'C'],
-      top: 50,
-      left: 'center',
-      backgroundColor: 'red',
-      z: 100
-    },
-    grid: {
-      containLabel: true
-    },
-    tooltip: {
-      show: true,
-      trigger: 'axis'
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-      // show: false
-    },
-    yAxis: {
-      x: 'center',
-      type: 'value',
-      splitLine: {
-        lineStyle: {
-          type: 'dashed'
-        }
-      }
-      // show: false
-    },
-    series: [{
-      name: 'A',
-      type: 'line',
-      smooth: true,
-      data: [18, 36, 65, 30, 78, 40, 33]
-    }, {
-      name: 'B',
-      type: 'line',
-      smooth: true,
-      data: [12, 50, 51, 35, 70, 30, 20]
-    }, {
-      name: 'C',
-      type: 'line',
-      smooth: true,
-      data: [10, 30, 31, 50, 40, 20, 10]
-    }]
-  };
+//   var option = {
+//     title: {
+//       text: '',
+//       left: 'center'
+//     },
+//     legend: {
+//       data: ['A', 'B', 'C','D'],
+//       top: 20,
+//       left: 'center',
+//       backgroundColor: 'red',
+//       z: 100
+//     },
+//     grid: {
+//       containLabel: true
+//     },
+//     tooltip: {
+//       show: true,
+//       trigger: 'axis'
+//     },
+//     xAxis: {
+//       type: 'category',
+//       boundaryGap: false,
+//       data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日', '周十', '周八', '周九','周七'],
+//       // show: false
+//     },
+//     yAxis: {
+//       x: 'center',
+//       type: 'value',
+//       splitLine: {
+//         lineStyle: {
+//           type: 'dashed'
+//         }
+//       }
+//       // show: false
+//     },
+//     series: [{
+//       name: 'A',
+//       type: 'line',
+//       smooth: true,
+//       data: [18, 36, 65, 30, 78, 40, 33,23,32,41,50]
+//     }, {
+//       name: 'B',
+//       type: 'line',
+//       smooth: true,
+//       data: [12, 50, 51, 35, 70, 30, 20,23,32,41,90]
+//     }, {
+//       name: 'C',
+//       type: 'line',
+//       smooth: true,
+//       data: [10, 30, 31, 50, 40, 20, 10,23,32,41,30]
+//     },{
+//       name: 'D',
+//       type: 'line',
+//       smooth: true,
+//       data: [40, 60, 66, 50, 80, 20, 10,23,32,41,60]
+//     }]
+//   };
 
-  chart.setOption(option);
-  return chart;
-}
+//   chart.setOption(option);
+//   return chart;
+// }
 
 
 
@@ -79,9 +84,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ec: {
-      onInit: initChart
-    },
+    // ec: {
+    //   onInit: initChart
+    // },
     ec_pig: {
       lazyLoad: true // 将 lazyLoad 设为 true 后，需要手动初始化图表
     },
@@ -138,9 +143,15 @@ Page({
 
     this.currentTime()
 
-    // this.pig_component = this.selectComponent('#mychart-line');
+    this.pig_component = this.selectComponent('#mychart-line');
 
-    // that.chartInit(["1","2","3","4","5","6"],[0,20,40,60,80,100],["上班","下班"])
+    var xdata = ['张一','张一','张一','张一','张一','张一','张一','张一','张一','张一','张二','张三','张4','张5','张6','张7']
+        var ydata = ['10','30','60','90','20','70','80','24','55','67','40']
+        var axisLabel = { //设置x轴的字
+          show:true,
+          interval:0,
+      }
+    that.chartInit(xdata,ydata,axisLabel)
   },
   getAllCus() {
     let that = this;
@@ -246,59 +257,94 @@ Page({
     console.log('所有选中的值为：', detailValue)
    },
    // 开始画图
-  //  chartInit:function(xdata,ydata,axisLabel){
-  //   var that = this;
-  //   that.pig_component.init((canvas, width, height) => {
-  //       const chart = echarts.init(canvas, null, { width: width, height: height});
-  //       that.setLineOption(chart, xdata, ydata,axisLabel);
-  //       return chart;  // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-  //   });    
-// },
+   chartInit:function(xdata,ydata,axisLabel){
+    var that = this;
+    that.pig_component.init((canvas, width, height) => {
+        const chart = echarts.init(canvas, null, { width: width, height: height});
+        that.setLineOption(chart, xdata, ydata,axisLabel);
+        return chart;  // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+    });    
+},
 
-// setLineOption:function(chart, xdata, ydata,axisLabel){
-//     var option = {
-//         backgroundColor: "#ffffff",
-//         color: ["#E60012"],
-//         title: {
-//             show: false
-//         },
-//         legend: {
-//             show: false
-//         },
-//         grid: {
-//             containLabel: true,
-//             top: 20,
-//             bottom:0
-//         },
-//         tooltip: {
-//             show: true,
-//             trigger: 'axis'
-//         },
-//         xAxis: {
-//             type: 'category',
-//             boundaryGap: false,
-//             data:xdata,
-//             axisLabel: axisLabel,
-//         },
-//         yAxis: {
-//             x: 'center',
-//             type: 'value',
-//             splitLine: {
-//                 lineStyle: {
-//                 type: 'dashed'
-//                 }
-//             },
-//             minInterval: 1,
-//             y:'dataMin'
-//         },
-//         series: [{
-//             name: '数量',
-//             type: 'line',
-//             smooth: true,
-//             data: ydata
-//         }]
-//     };
-//     chart.setOption(option);
-//     return chart;
-// },
+setLineOption:function(chart, xdata, ydata,axisLabel){
+    var option = {
+        // backgroundColor: "#ffffff",
+        // color: ["#E60012"],
+        title: {
+            show: false
+        },
+            legend: {
+              show: false
+      // data: ['A', 'B', 'C','D'],
+      // top: 0,
+      // left: 'center',
+      // backgroundColor: 'red',
+      // z: 100
+    },
+        grid: {
+            containLabel: true,
+            top: 50,
+            bottom:20
+        },
+        tooltip: {
+            show: true,
+            trigger: 'axis'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data:xdata,
+            axisLabel: axisLabel,
+        },
+            yAxis: {
+      x: 'center',
+      type: 'value',
+      splitLine: {
+        lineStyle: {
+          type: 'dashed'
+        }
+      }
+      // show: false
+    },
+        // yAxis: {
+        //     x: 'center',
+        //     type: 'value',
+        //     splitLine: {
+        //         lineStyle: {
+        //         type: 'dashed'
+        //         }
+        //     },
+        //     y:'dataMin'
+        // },
+        // series: [{
+        //     name: '数量',
+        //     type: 'line',
+        //     smooth: true,
+        //     data: ydata
+        // }]
+             series: [{
+                name: 'A',
+                type: 'line',
+                smooth: true,
+                data: [18, 36, 65, 30, 78, 40, 33,23,32,41,50,90,90,90,90,90]
+              }, {
+                name: 'B',
+                type: 'line',
+                smooth: true,
+                data: [12, 50, 51, 35, 70, 30, 20,23,32,41,90,90,90,90,90,90]
+              }, {
+                name: 'C',
+                type: 'line',
+                smooth: true,
+                data: [10, 30, 31, 50, 40, 20, 10,23,32,41,30,90,90,90,90,90]
+              },{
+                name: 'D',
+                type: 'line',
+                smooth: true,
+                data: [40, 60, 66, 50, 80, 20, 10,23,32,41,60,90,90,90,90,90]
+              }]
+    };
+    chart.setOption(option);
+    return chart;
+},
 })

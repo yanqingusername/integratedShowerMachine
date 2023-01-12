@@ -12,6 +12,7 @@ Page({
     title: "",
     real_name: "",
     company: "",
+    head_url:""
   },
   onShow: function () {
   },
@@ -20,6 +21,7 @@ Page({
       title: options.title,
       real_name: app.globalData.userInfo.real_name,
       company: app.globalData.userInfo.company,
+      head_url: app.globalData.userInfo.head_url,
     });
     
     wx.setNavigationBarTitle({

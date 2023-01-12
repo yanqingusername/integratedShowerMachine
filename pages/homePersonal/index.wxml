@@ -13,7 +13,7 @@
         <view class="hp_1_item">
 			<view class="hp_1_item_l">
 				<view class="hp_1_item_l_1">
-					<image class='hp_1_item_l_h' src='/image/icon/icon_2023_01_06_09.png' />
+					<image class='hp_1_item_l_h' src='{{head_url}}' />
 				</view>
 				<view class="hp_1_item_l_2">
 					<view class="hp_1_item_l_2_title">{{real_name}}</view>

@@ -64,3 +64,11 @@ font-family: PingFangSC-Regular, PingFang SC;
 font-weight: 400;
 color: #666666;
 }
+
+.v1_1_1_2_1{
+  width: 104rpx;
+    height: 104rpx;
+    background: #FAFCFF;
+    border: 1px solid #EAF4FE;
+    border-radius: 100%;
+}

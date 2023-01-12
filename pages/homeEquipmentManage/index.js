@@ -1,26 +1,13 @@
-const app = getApp()
-const utils = require('../../utils/utils.js')
+const app = getApp();
 const request = require('../../utils/request.js')
 const box = require('../../utils/box.js')
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    page: 1,
+    limit: 10,
+    deviceinfoList: [],
     title: "",
-    dataList: [
-      {
-        "id": 1,
-        "name":"张三",
-        "custom": "测试",
-        "headerimg": ''
-      }
-    ],
-  },
-  onShow: function () {
-    // this.getAllCus();
   },
   onLoad: function (options) {
     this.setData({
@@ -31,32 +18,75 @@ Page({
       title: options.title
     })
   },
-  getAllCus(){
-    let that = this;
-    let data = {
-      openid: app.globalData.openid,
+  onShow: function () {
+    this.setData({
+      page: 1
+    });
+    this.getdeviceinfo();
+  },
+  onReachBottom: function () {
+    this.getdeviceinfo();
+  },
+  getdeviceinfo: function () {
+    var that = this;
+    var data = {
+      page: that.data.page,
+      limit: that.data.limit,
+      company_serial: app.globalData.userInfo.company_serial
     }
-    request.request_get('/Newacid/getShoppingAddress.hn', data, function (res) {
-      console.info('回调', res)
+    request.request_get('/equipmentManagement/getdeviceinfo.hn', data, function (res) {
       if (res) {
         if (res.success) {
-          that.setData({
-            dataList: res.msg
-          })
+          if (that.data.page == 1) {
+            that.setData({
+              deviceinfoList: res.info,
+              page: (res.info && res.info.length > 0) ? that.data.page + 1 : that.data.page
+            });
+          } else {
+            that.setData({
+              deviceinfoList: that.data.deviceinfoList.concat(res.info || []),
+              page: (res.info && res.info.length > 0) ? that.data.page + 1 : that.data.page,
+            });
+          }
         } else {
           box.showToast(res.msg);
         }
-      } else {
-        box.showToast("网络不稳定，请重试");
       }
     })
   },
-  onReachBottom: function () {
-    
+  bindDeleteClick(e) {
+    let that = this;
+    let id = e.currentTarget.dataset.id;
+    if (id) {
+      wx.showModal({
+        title: '是否删除设备?',
+        content: '删除设备后无法恢复',
+        success: function (res) {
+          if (res.confirm) {
+            var data = {
+              id: id,
+              status: '1'
+            }
+            request.request_get('/equipmentManagement/deletedeviceinfo.hn', data, function (res) {
+              if (res) {
+                if (res.success) {
+                  that.setData({
+                    page: 1
+                  });
+                  that.getdeviceinfo();
+                } else {
+                  box.showToast(res.msg);
+                }
+              }
+            })
+          }
+        }
+      })
+    }
   },
-  bindAddEquipment(){
+  bindAddEquipment() {
     wx.navigateTo({
-      url:`/pages/homeEquipmentAdd/index`
+      url: `/pages/homeEquipmentAdd/index`
     });
   },
-})
+});

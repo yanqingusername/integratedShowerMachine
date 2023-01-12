@@ -32,7 +32,7 @@ page {
 }
 
 .P5_2 {
-  width: 65%;
+  width: 75%;
   /* padding: 20rpx; */
   height: 80rpx;
   color: #555555;
@@ -310,4 +310,12 @@ page {
   font-size: 38rpx;
   color: #999999;
   width: 400rpx;
+}
+
+.delete_img{
+  width: 40rpx;
+    height: 40rpx;
+    position: absolute;
+    top: 0rpx;
+    right: 0rpx;
 }

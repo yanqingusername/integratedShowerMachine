@@ -6,6 +6,7 @@ Page({
 	data:{
         real_name: "",
         role_name: "",
+        head_url: "",
         homePersonal: [],
         StatusBar: app.globalData.StatusBar,
         CustomBar: app.globalData.CustomBar,
@@ -15,6 +16,7 @@ Page({
         this.setData({
             real_name: app.globalData.userInfo.real_name,
             role_name: app.globalData.userInfo.role_name,
+            head_url: app.globalData.userInfo.head_url,
         });
         this.setData({
             isIphoneX: this.isIphoneX()

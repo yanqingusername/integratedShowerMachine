@@ -12,24 +12,19 @@ Page({
     name: "",
     position: "",
     submitState: true,
-    jobNameList:[
-      {
-        "id": 1,
-        "name": '测试1'
-      },
-      {
-        "id": 2,
-        "name": '测试2'
-      }
-    ],
+    jobNameList: [],
     categoryIndex: 0,
     isShowRegion: 1,
     genderList: ['男', '女'],
     genderIndex: 0,
     gender: '',
-    isShowGender: 1
+    isShowGender: 1,
+    job_id: '',
+    job_name: ''
   },
-  onShow: function () {},
+  onShow: function () {
+    this.getdevicelist();
+  },
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: "新增设备信息"
@@ -37,7 +32,7 @@ Page({
   },
   //保存按钮禁用判断
   checkSubmitStatus: function (e) {
-    if (this.data.name != '' && this.data.position != '') {
+    if (this.data.name != '' && this.data.position != '' && this.data.job_id != '' && this.data.job_name != '' && this.data.gender != '') {
       this.setData({
         submitState: false
       })
@@ -66,51 +61,89 @@ Page({
     this.checkSubmitStatus();
   },
   // 类别改变
-  bindJobNameChange:function(e) {
+  bindJobNameChange: function (e) {
     var categoryIndex = e.detail.value;
     this.setData({
-        categoryIndex: categoryIndex,
-        job_name: this.data.jobNameList[categoryIndex].name,
-        isShowRegion: 2
-    })
-},
-bindPickerChangeGender: function (e) {
-  var that = this;
-  console.log('picker发送选择改变，携带值为', e.detail.value)
-  this.setData({
-    genderIndex: e.detail.value,
-    gender: that.data.genderList[e.detail.value],
-    isShowGender: 2
-  })
-  console.log('picker发送选择改变，携带值为', that.data.genderIndex)
-},
+      categoryIndex: categoryIndex,
+      job_id: this.data.jobNameList[categoryIndex].id,
+      job_name: this.data.jobNameList[categoryIndex].name,
+      isShowRegion: 2
+    });
+    this.checkSubmitStatus();
+  },
+  bindPickerChangeGender: function (e) {
+    var that = this;
+    this.setData({
+      genderIndex: e.detail.value,
+      gender: that.data.genderList[e.detail.value],
+      isShowGender: 2
+    });
+    this.checkSubmitStatus();
+  },
   submitBuffer() {
     let that = this;
     let name = this.data.name;
     let position = this.data.position;
-    if(!name){
+    let job_id = this.data.job_id;
+    let job_name = this.data.job_name;
+    let gender = this.data.gender;
+
+    if (!name) {
       box.showToast("请输入设备编号");
       return;
     }
 
-    if(!position){
+    if (!position) {
       box.showToast("请输入设备位置");
       return;
     }
 
-    let params = {
-      name: name,
-      position: position
+    if (!job_name) {
+      box.showToast("请选择设备类型");
+      return;
     }
 
-    console.log('---->:', params)
+    if (!gender) {
+      box.showToast("请选择性别");
+      return;
+    }
 
-    request.request_get('', params, function (res) {
+    let params = {
+      company_serial: app.globalData.userInfo.company_serial,
+      sn: name, //设备编号
+      address: position, //位置描述
+      type:  job_id,//设备类型
+      gender: gender == '男' ? '0' : '1' //男女
+    }
+
+    request.request_get('/equipmentManagement/adddeviceinfo.hn', params, function (res) {
       console.info('回调', res)
       if (res) {
         if (res.success) {
           wx.navigateBack({
             delta: 1,
+          });
+        } else {
+          box.showToast(res.msg);
+        }
+      } else {
+        box.showToast("网络不稳定，请重试");
+      }
+    })
+
+  },
+  getdevicelist() {
+    let that = this;
+    let params = {
+      company_serial: app.globalData.userInfo.company_serial
+    }
+
+    request.request_get('/equipmentManagement/getdevicelist.hn', params, function (res) {
+      console.info('回调', res)
+      if (res) {
+        if (res.success) {
+          that.setData({
+            jobNameList: res.type
           });
         } else {
           box.showToast(res.msg);

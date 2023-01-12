@@ -1,14 +1,13 @@
-const app = getApp()
-const utils = require('../../utils/utils.js')
+const app = getApp();
 const request = require('../../utils/request.js')
 const box = require('../../utils/box.js')
+const utils = require('../../utils/utils.js')
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    page: 1,
+    limit: 10,
+    employeesList: [],
     title: "",
     dataList: [
       {
@@ -19,8 +18,6 @@ Page({
       }
     ],
   },
-  onShow: function () {
-  },
   onLoad: function (options) {
     this.setData({
       title: options.title
@@ -30,23 +27,39 @@ Page({
       title: options.title
     })
   },
-  getAllCus(){
-    let that = this;
-    let data = {
-      user_id: this.data.user_id
+  onShow: function () {
+    this.setData({
+      page: 1
+    });
+    this.getEmployeesList();
+  },
+  onReachBottom: function () {
+    this.getEmployeesList();
+  },
+  getEmployeesList: function () {
+    var that = this;
+    var data = {
+      page: that.data.page,
+      limit: that.data.limit,
+      company_serial: app.globalData.userInfo.company_serial
     }
-    request.request_get('/Newacid/getShoppingAddress.hn', data, function (res) {
-      console.info('回调', res)
+    request.request_get('/personnelManagement/getEmployeesList.hn', data, function (res) {
       if (res) {
         if (res.success) {
-          that.setData({
-            dataList: res.msg
-          })
+          if (that.data.page == 1) {
+            that.setData({
+              employeesList: res.info,
+              page: (res.info && res.info.length > 0) ? that.data.page + 1 : that.data.page
+            });
+          } else {
+            that.setData({
+              employeesList: that.data.employeesList.concat(res.info || []),
+              page: (res.info && res.info.length > 0) ? that.data.page + 1 : that.data.page,
+            });
+          }
         } else {
           box.showToast(res.msg);
         }
-      } else {
-        box.showToast("网络不稳定，请重试");
       }
     })
   },
@@ -55,4 +68,4 @@ Page({
       url:`/pages/homeCusAdd/index`
     });
   }
-})
+});

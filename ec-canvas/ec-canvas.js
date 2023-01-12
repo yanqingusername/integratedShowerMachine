@@ -147,6 +147,7 @@ Component({
           this.canvasNode = canvasNode
 
           const canvasDpr = wx.getSystemInfoSync().pixelRatio
+          console.log(res,canvasDpr)
           const canvasWidth = res[0].width
           const canvasHeight = res[0].height
 

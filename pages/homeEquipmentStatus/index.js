@@ -10,11 +10,11 @@ Page({
         count: 0
 	},
     onLoad:function() {
-        
+      var that = this;
+      that.getdeviceinfo();
     },
     onShow:function(){
-        var that = this;
-        that.getdeviceinfo();
+        
     },
     onReachBottom: function () {
         this.getdeviceinfo();
@@ -23,7 +23,8 @@ Page({
         var that = this;
         var data = {
             page: that.data.page,
-            limit: that.data.limit
+            limit: that.data.limit,
+            company_serial: app.globalData.userInfo.company_serial
         }
         request.request_get('/equipmentManagement/getdeviceinfo.hn', data, function (res) {
             if (res) {
@@ -48,8 +49,11 @@ Page({
         })
     },
     handleRouter(e){
+      let id = e.currentTarget.dataset.id;
+      if(id){
         wx.navigateTo({
-            url: "/pages/homeEquipmentStatusList/index"
+          url: `/pages/homeEquipmentStatusList/index?eid=${id}`
         });
+      }
     }
 });

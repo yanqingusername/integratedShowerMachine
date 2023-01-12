@@ -7,9 +7,12 @@ Page({
         page: 1,
         limit: 10,
         deviceinfoList: [],
+        id: ""
 	},
-    onLoad:function() {
-        
+    onLoad:function(options) {
+        this.setData({
+          id: options.eid
+        });
     },
     onShow:function(){
         var that = this;
@@ -22,22 +25,21 @@ Page({
         var that = this;
         var data = {
             page: that.data.page,
-            limit: that.data.limit
+            limit: that.data.limit,
+            id: that.data.id
         }
-        request.request_get('/equipmentManagement/getdeviceinfo.hn', data, function (res) {
+        request.request_get('/iwadom/getspecificIwadominfo.hn', data, function (res) {
             if (res) {
                 if (res.success) {
                   if (that.data.page == 1) {
                     that.setData({
-                        count: res.count,
-                        deviceinfoList: res.info,
-                      page: (res.info && res.info.length > 0) ? that.data.page + 1 : that.data.page
+                        deviceinfoList: res.data,
+                      page: (res.data && res.data.length > 0) ? that.data.page + 1 : that.data.page
                     });
                   } else {
                     that.setData({
-                        count: res.count,
-                        deviceinfoList: that.data.deviceinfoList.concat(res.info || []),
-                      page: (res.info && res.info.length > 0) ? that.data.page + 1 : that.data.page,
+                        deviceinfoList: that.data.deviceinfoList.concat(res.data || []),
+                      page: (res.data && res.data.length > 0) ? that.data.page + 1 : that.data.page,
                     });
                   }
                 } else {
