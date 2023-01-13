@@ -36,7 +36,7 @@ Page({
       uid: options.uid
     });
     wx.setNavigationBarTitle({
-      title: "新增员工信息"
+      title: this.data.isEditCus == 1 ? "新增员工信息" : "编辑员工信息"
     })
 
   },
