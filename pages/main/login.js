@@ -6,8 +6,8 @@ const utils = require('../../utils/utils.js')
 
 Page({
     data: {
-        phone: "",
-        password: ''
+        phone: "17864239211",
+        password: '000122'
     },
 
     onLoad: function () {

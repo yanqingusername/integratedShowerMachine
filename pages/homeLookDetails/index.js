@@ -365,9 +365,10 @@ Page({
       },
       xAxis: {
         type: 'category',
-        boundaryGap: false,
+        boundaryGap: true,
         data: xdata,
         axisLabel: axisLabel,
+        alignWithLabel: true
       },
       yAxis: {
         x: 'center',
@@ -435,32 +436,34 @@ Page({
       if (res) {
         if (res.success) {
           var xdata = res.xdata
+          // var xdata = ['张三','张三一发发发','张三二','张三撒','张三福','张三发','张三丰','张无丰','张的丰','张啊丰','张到丰','张卡丰',]
           var ydata = []
           var series = res.ydata
           // var series = [{
           //   "name": "上班成功",
           //   "type": "line",
           //   "smooth": true,
-          //   "data": [20, 30,40,50,60,35]
+          //   "data": [20, 30,40,50,60,35,40,10,25,55,65,35]
           // }, {
           //   "name": "下班成功",
           //   "type": "line",
           //   "smooth": true,
-          //   "data": [10, 60,70,45,20,30]
+          //   "data": [10, 60,70,45,20,30,50,40,25,35,65,55]
           // }, {
           //   "name": "上班失败",
           //   "type": "line",
           //   "smooth": true,
-          //   "data": [15, 25,40,55,40,60]
+          //   "data": [15, 25,40,55,40,60,80,30,70,45,20,65]
           // }, {
           //   "name": "下班失败",
           //   "type": "line",
           //   "smooth": true,
-          //   "data": [30, 40,50,30,50,50]
+          //   "data": [30, 40,50,30,50,50,60,20,10,55,75,45]
           // }]
           var axisLabel = { //设置x轴的字
             show: true,
             interval: 0,
+            rotate: 40
           }
           that.chartInit(xdata, ydata, axisLabel, series)
 
