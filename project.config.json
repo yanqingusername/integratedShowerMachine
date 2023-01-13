@@ -43,7 +43,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.16.0",
-  "appid": "wx2fbf4842ea16c40c",
+  "appid": "wx52f0017aca5943e2",
   "projectname": "integratedShowerMachine",
   "debugOptions": {
     "hidedInDevtools": []
@@ -67,9 +67,7 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        
-      ]
+      "list": []
     }
   }
 }
