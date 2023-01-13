@@ -377,7 +377,8 @@ Page({
           lineStyle: {
             type: 'dashed'
           }
-        }
+        },
+        minInterval: 1
         // show: false
       },
       // yAxis: {
