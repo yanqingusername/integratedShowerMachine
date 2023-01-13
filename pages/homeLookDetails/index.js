@@ -288,15 +288,6 @@ Page({
           }
         }
 
-
-        // for(let i = 0; i< this.data.homePersonalOld.length; i++){
-        //   for(let j = 0; j < this.data.homePersonalOldIds.length; j++){
-        //     if(this.data.homePersonalOld[i].id == this.data.homePersonalOldIds[j]){
-        //       this.data.homePersonalOld[i].selected = true;
-        //     }
-        //   }
-        // }
-
         this.setData({
           homePersonalIds: this.data.homePersonalOldIds,
           homePersonal: homePersonal
@@ -314,15 +305,40 @@ Page({
         });
       }
     } else {
-      let homePersonal = this.data.homePersonalOld;
+      if(this.data.homePersonalOldIds.length > 0){
+        console.log('222222')
+        console.log('222222',this.data.homePersonalOldIds)
+        console.log('222222',this.data.homePersonalOld)
+
+        let homePersonal = this.data.homePersonalOld;
         for(let i = 0; i< homePersonal.length; i++){
           homePersonal[i].selected = false;
+
+          for(let j = 0; j < this.data.homePersonalOldIds.length; j++){
+            if(this.data.homePersonalOldIds[j] == homePersonal[i].id){
+              homePersonal[i].selected = true;
+              break;
+            }else{
+              homePersonal[i].selected = false;
+            }
+          }
         }
-      this.setData({
-        homePersonalIds: [],
-        homePersonalOldIds: [],
-        homePersonal: homePersonal
-      });
+
+        this.setData({
+          homePersonalIds: this.data.homePersonalOldIds,
+          homePersonal: homePersonal
+        });
+      } else {
+        let homePersonal = this.data.homePersonalOld;
+          for(let i = 0; i< homePersonal.length; i++){
+            homePersonal[i].selected = false;
+          }
+        this.setData({
+          homePersonalIds: [],
+          homePersonalOldIds: [],
+          homePersonal: homePersonal
+        });
+      }
     }
   },
   onConfirm(e) {
@@ -335,7 +351,7 @@ Page({
         homePersonalOldIds: [].concat(this.data.homePersonalIds||[]),
       });
     } else {
-      box.showToast("请选择员工姓名");
+      // box.showToast("请选择员工姓名");
       this.setData({
         homePersonalIds: [],
         // homePersonal: this.data.homePersonalOld
