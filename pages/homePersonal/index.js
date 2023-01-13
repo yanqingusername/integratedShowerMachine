@@ -11,18 +11,25 @@ Page({
         StatusBar: app.globalData.StatusBar,
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
+        id: ""
 	},
     onLoad:function() {
         this.setData({
-            real_name: app.globalData.userInfo.real_name,
-            role_name: app.globalData.userInfo.role_name,
-            head_url: app.globalData.userInfo.head_url,
+            // real_name: app.globalData.userInfo.real_name,
+            // role_name: app.globalData.userInfo.role_name,
+            // head_url: app.globalData.userInfo.head_url,
+            id: app.globalData.userInfo.id,
         });
         this.setData({
             isIphoneX: this.isIphoneX()
         });
     },
     onShow:function(){
+        this.setData({
+            real_name: app.globalData.userInfo.real_name,
+            role_name: app.globalData.userInfo.role_name,
+            head_url: app.globalData.userInfo.head_url,
+        });
         var that = this;
         that.getWorderInfo();
     },
@@ -48,16 +55,16 @@ Page({
     getWorderInfo:function(){
         var that = this;
         var data = {
-            id: app.globalData.userInfo.id
+            id: this.data.id
         }
         request.request_get('/AppletCommon/getUserinfo.hn', data, function (res) {
             if(res){
                 if(res.success){
                     var homePersonal = res.personal;
                     that.setData({ homePersonal: homePersonal});
-                    var userInfo = res.userinfo;
-                    // 存储用户信息
-                    app.globalData.userInfo = userInfo[0];
+                    // var userInfo = res.userinfo;
+                    // //存储用户信息
+                    // app.globalData.userInfo = userInfo[0];
                 }else{
                     box.showToast(res.msg);
                 }

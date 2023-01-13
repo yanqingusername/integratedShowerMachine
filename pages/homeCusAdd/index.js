@@ -330,9 +330,15 @@ Page({
       console.info('回调', res)
       if (res) {
         if (res.success) {
-          wx.navigateBack({
-            delta: 1,
-          });
+          if(that.data.isEditCus == 2){
+            if(that.data.uid == app.globalData.userInfo.id){
+              that.getWorderInfo();
+            }
+          }else{
+            wx.navigateBack({
+              delta: 1,
+            });
+          }
         } else {
           box.showToast(res.msg);
         }
@@ -346,30 +352,54 @@ Page({
     let that = this;
     let id = this.data.uid;
     if (id) {
-      wx.showModal({
-        title: '确认删除该员工？',
-        content: '删除后无法恢复',
-        success: function (res) {
-          if (res.confirm) {
-            var data = {
-              id: id,
-            }
-            request.request_get('/personnelManagement/deleteEmployee.hn', data, function (res) {
-              if (res) {
-                if (res.success) {
-                  box.showToast(res.msg);
-                  wx.navigateBack({
-                    delta: 1,
-                  });
-                } else {
-                  box.showToast(res.msg);
-                }
+      if(id == app.globalData.userInfo.id){
+        box.showToast("该员工信息无法删除");
+      } else {
+        wx.showModal({
+          title: '确认删除该员工？',
+          content: '删除后无法恢复',
+          success: function (res) {
+            if (res.confirm) {
+              var data = {
+                id: id,
               }
-            })
+              request.request_get('/personnelManagement/deleteEmployee.hn', data, function (res) {
+                if (res) {
+                  if (res.success) {
+                    box.showToast(res.msg);
+                    wx.navigateBack({
+                      delta: 1,
+                    });
+                  } else {
+                    box.showToast(res.msg);
+                  }
+                }
+              })
+            }
           }
-        }
-      })
+        })
+      }
     }
   },
-
+// 获取个人中心的信息
+    getWorderInfo:function(){
+        var that = this;
+        var data = {
+            id: this.data.uid
+        }
+        request.request_get('/AppletCommon/getUserinfo.hn', data, function (res) {
+            if(res){
+                if(res.success){
+                    var userInfo = res.userinfo;
+                    //存储用户信息
+                    app.globalData.userInfo = userInfo[0];
+                    wx.navigateBack({
+                      delta: 1,
+                    });
+                }else{
+                    box.showToast(res.msg);
+                }
+            }
+        })
+    },
 })
