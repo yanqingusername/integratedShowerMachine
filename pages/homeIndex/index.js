@@ -22,16 +22,19 @@ Page({
     },
 
     onLoad:function(){
-        this.setData({
-            real_name: app.globalData.userInfo.real_name,
-            company: app.globalData.userInfo.company,
-        });
-        this.currentTime()
+        // this.setData({
+        //     real_name: app.globalData.userInfo.real_name,
+        //     company: app.globalData.userInfo.company,
+        // });
+        // this.currentTime()
     },
     onShow:function(){
         this.setData({
-            page: 1
+            page: 1,
+            real_name: app.globalData.userInfo.real_name,
+            company: app.globalData.userInfo.company,
         });
+        this.currentTime();
         this.getdeviceRun();
         this.getIwadomlistinfo();
     },
