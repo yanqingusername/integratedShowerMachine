@@ -26,6 +26,17 @@ Page({
     page: 1,
     limit: 10,
     iwadomListinfo: [],
+    // iwadomListinfo: [
+    //   {
+    //     "sn": "001",
+    //     "address": "一消-男",
+    //     "head_url": "",
+    //     "real_name": "李思琪",
+    //     "workType": "0",
+    //     "create_time": "2023.01.04 08:30",
+    //     "status": '1'
+    //   }
+    // ],
     start_time: "", //开始时间，第二个接口用  默认当前
     end_time: "", //结束时间 同开始时间
     status: '', //洗消状态 1成功 2失败 0沐浴中
@@ -426,6 +437,27 @@ Page({
           var xdata = res.xdata
           var ydata = []
           var series = res.ydata
+          // var series = [{
+          //   "name": "上班成功",
+          //   "type": "line",
+          //   "smooth": true,
+          //   "data": [20, 30,40,50,60,35]
+          // }, {
+          //   "name": "下班成功",
+          //   "type": "line",
+          //   "smooth": true,
+          //   "data": [10, 60,70,45,20,30]
+          // }, {
+          //   "name": "上班失败",
+          //   "type": "line",
+          //   "smooth": true,
+          //   "data": [15, 25,40,55,40,60]
+          // }, {
+          //   "name": "下班失败",
+          //   "type": "line",
+          //   "smooth": true,
+          //   "data": [30, 40,50,30,50,50]
+          // }]
           var axisLabel = { //设置x轴的字
             show: true,
             interval: 0,

@@ -28,7 +28,7 @@ Page({
     uid: ''
   },
   onShow: function () {
-    this.getRoleinfo();
+    
   },
   onLoad: function (options) {
     this.setData({
@@ -39,6 +39,7 @@ Page({
       title: this.data.isEditCus == 1 ? "新增员工信息" : "编辑员工信息"
     })
 
+    this.getRoleinfo();
   },
   getuserinfo() {
     let that = this;
@@ -330,9 +331,14 @@ Page({
       console.info('回调', res)
       if (res) {
         if (res.success) {
+          box.showToast(res.msg);
           if(that.data.isEditCus == 2){
             if(that.data.uid == app.globalData.userInfo.id){
               that.getWorderInfo();
+            }else{
+              wx.navigateBack({
+                delta: 1,
+              });
             }
           }else{
             wx.navigateBack({

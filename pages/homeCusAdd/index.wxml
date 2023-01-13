@@ -61,9 +61,13 @@
 
         <view class="P5 app_flex" style="margin: 14rpx 0rpx 10rpx 0rpx;">
           <view class="P5_1 app_font">头像</view>
-          <image wx:if="{{frontPhoto}}" src="{{frontPhoto}}" bindtap="preview" data-url="{{frontPhoto}}" mode="widthFix" style="width:100rpx;height:100rpx;margin-top:0rpx;position:relative;">
+          <view wx:if="{{frontPhoto}}" bindtap="preview" data-url="{{frontPhoto}}" style="width:100rpx;height:100rpx;margin-top:0rpx;position:relative;border-radius:100%;">
+            <image wx:if="{{frontPhoto}}" src="{{frontPhoto}}" style="width:100rpx;height:100rpx;margin-top:0rpx;position:relative;border-radius:100%;">
+              
+            </image>
             <image class="delete_img" catch:tap="delview" src="/image/icon/icon_2023_01_06_27.png"></image>
-          </image>
+          </view>
+          
           <text wx:else bindtap="ChooseImage" class="cuIcon-cameraadd my_photo"></text>
         </view>
 

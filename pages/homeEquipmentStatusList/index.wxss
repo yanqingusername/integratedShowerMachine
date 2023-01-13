@@ -82,3 +82,10 @@ color: #666666;
 margin-top: 18rpx;
 padding-left: 34rpx;
 }
+
+.homeindex_4_1_top_2_t{
+    font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #999999;margin-right: 4rpx;
+  }
