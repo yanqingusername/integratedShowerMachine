@@ -54,7 +54,10 @@ Page({
             if(res){
                 if(res.success){
                     var homePersonal = res.personal;
-                    that.setData({ homePersonal: homePersonal})
+                    that.setData({ homePersonal: homePersonal});
+                    var userInfo = res.userinfo;
+                    // 存储用户信息
+                    app.globalData.userInfo = userInfo[0];
                 }else{
                     box.showToast(res.msg);
                 }
