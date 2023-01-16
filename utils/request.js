@@ -4,7 +4,7 @@
 
 // 参数配置
 var apiurl = 'http://syrdev.coyotebio-lab.com:8080/IntelligentCreature'   // 测试服务器
-// var apiurl = 'https://www.prohealth-wch.com:8443/IntelligentCreature'    //正式服务器
+// var apiurl = 'https://monitor.coyotebio-lab.com:8443/IntelligentCreature'    //正式服务器
 
 // var apiurl = 'http://192.168.81.90:8080/IntelligentCreature'     // 本地测试
 
