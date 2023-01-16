@@ -187,7 +187,7 @@ Page({
 
         for (let i = 0; i < filePath.length; i++) {
           wx.uploadFile({
-            url: 'http://syrdev.coyotebio-lab.com:8080/IntelligentCreature/personnelManagement/upload.hn',  // 正式服务器
+            url: 'http://syrdev.coyotebio-lab.com:8080/IntelligentCreature/personnelManagement/upload.hn',  // 测试服务器
             // url: 'https://monitor.coyotebio-lab.com:8443/IntelligentCreature/personnelManagement/upload.hn',  // 正式服务器
             filePath: filePath[i],
             name: 'imageFile',
