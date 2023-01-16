@@ -65,10 +65,11 @@
     <view class="canvas_view">
         <view class="canvas_view_title">统计报表</view>
         <view class="canvas_view_center">
-            <view class="canvas_view_center_1"><view class="canvas_view_center_1_1" style="background:#546FC6;"></view>上班成功</view>
+            <view class="canvas_view_center_1" wx:for="{{colorList}}" wx:key="index"><view class="canvas_view_center_1_1" style="background:{{item.color}};"></view>{{item.name}}</view>
+            <!-- <view class="canvas_view_center_1"><view class="canvas_view_center_1_1" style="background:#546FC6;"></view>上班成功</view>
             <view class="canvas_view_center_1"><view class="canvas_view_center_1_1" style="background:#91CB74;"></view>下班成功</view>
             <view class="canvas_view_center_1"><view class="canvas_view_center_1_1" style="background:#FAC859;"></view>上班失败</view>
-            <view class="canvas_view_center_1"><view class="canvas_view_center_1_1" style="background:#ED6665;"></view>下班失败</view>
+            <view class="canvas_view_center_1"><view class="canvas_view_center_1_1" style="background:#ED6665;"></view>下班失败</view> -->
         </view>
         <view class="P7">
             <ec-canvas id="mychart-line" canvas-id="mychart-line" ec="{{ ec_pig }}"></ec-canvas>

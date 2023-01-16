@@ -57,7 +57,9 @@ Page({
     homePersonal: [],
     homePersonalOld: [],
     homePersonalIds: [],
-    homePersonalOldIds: []
+    homePersonalOldIds: [],
+
+    colorList: []
   },
   clickName(e) {
     this.setData({
@@ -440,6 +442,10 @@ Page({
           // var xdata = ['张三','张三一发发发','张三二','张三撒','张三福','张三发','张三丰','张无丰','张的丰','张啊丰','张到丰','张卡丰',]
           var ydata = []
           var series = res.ydata
+
+          that.setData({
+            colorList: series
+          });
           // var series = [{
           //   "name": "上班成功",
           //   "type": "line",
