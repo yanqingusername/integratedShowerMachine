@@ -17,13 +17,15 @@
             </view>
 
             <view class="v2_1_cen">
-                <view class="v2_1_cen_1">
+                <view class="v2_1_cen_1" style="width: 65%;">
                     <view class="v2_1_cen_1_title">{{item.sn}}</view>
                     <view class="v2_1_cen_1_text">{{item.name}}</view>
                 </view>
-                <image class='v2_1_cen_img' src='/image/icon/icon_2023_01_06_21.png' wx:if="{{item.status == 0}}"></image>
-                <image class='v2_1_cen_img' src='/image/icon/icon_2023_01_06_22.png' wx:if="{{item.status == 1}}"></image>
-                <image class='v2_1_cen_img' src='/image/icon/icon_2023_01_06_20.png' wx:if="{{item.status == 2}}"></image>
+                <view >
+                    <image class='v2_1_cen_img' src='/image/icon/icon_2023_01_06_21.png' wx:if="{{item.status == 0}}"></image>
+                    <image class='v2_1_cen_img' src='/image/icon/icon_2023_01_06_22.png' wx:if="{{item.status == 1}}"></image>
+                    <image class='v2_1_cen_img' src='/image/icon/icon_2023_01_06_20.png' wx:if="{{item.status == 2}}"></image>
+                </view>
             </view>
 		</view>
     </view>

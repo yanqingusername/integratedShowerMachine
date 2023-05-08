@@ -103,7 +103,7 @@ padding: 30rpx 0rpx 0rpx 30rpx;
 height: 160px;
 background: #F6FAFF;
 border-radius: 4px;
-border: 2px solid #E6F6FF;
+border: 1px solid #E6F6FF;
 }
 
 .homeindex_3_view_1_1{
@@ -140,7 +140,7 @@ margin-top: 20rpx;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 152px;
+    width: 154px;
     height: 60px;
     background: #FFFFFF;
     border-radius: 0px 0px 4px 4px;

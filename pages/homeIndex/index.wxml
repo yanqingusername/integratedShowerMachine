@@ -40,7 +40,7 @@
                         </view>
                     </view>
                 </view>
-                <view class="homeindex_3_view_1" style="background: #EAF9EA;border: 2px solid #EAF9EA;">
+                <view class="homeindex_3_view_1" style="background: #EAF9EA;border: 1px solid #EAF9EA;">
                     <view class="homeindex_3_view_1_1">
                         <image class='homeindex_3_view_1_1_img' src='/image/icon/icon_2023_01_06_05.png'></image>
                         <view class="homeindex_3_view_1_1_title">空闲数量</view>
